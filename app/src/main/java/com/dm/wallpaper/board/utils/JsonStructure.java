@@ -44,7 +44,7 @@ public class JsonStructure {
 
 
 
-    public class Builder {
+    public static class Builder {
 
         private String mUrl = null;
         private List<NameValuePair> mValues = new ArrayList<>();
