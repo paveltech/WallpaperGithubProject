@@ -1,6 +1,5 @@
 package com.dm.wallpaper.board.utils;
 
-import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -10,48 +9,61 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.webkit.URLUtil;
 
-import com.danimahardhika.android.helpers.core.ColorHelper;
 import com.danimahardhika.android.helpers.core.FileHelper;
+import com.danimahardhika.android.helpers.core.utils.LogUtil;
 import com.danimahardhika.cafebar.CafeBar;
 import com.danimahardhika.cafebar.CafeBarTheme;
-import com.dm.material.dashboard.candybar.helpers.TypefaceHelper;
-import com.dm.material.dashboard.candybar.helpers.WallpaperHelper;
-import com.dm.material.dashboard.candybar.items.Wallpaper;
-import com.dm.material.dashboard.candybar.preferences.Preferences;
-import com.dm.material.dashboard.candybar.utils.LogUtil;
-
-import com.playoffstudio.wallpapergithubproject.R;
+import com.dm.wallpaper.board.R;
+import com.dm.wallpaper.board.helpers.TypefaceHelper;
+import com.dm.wallpaper.board.helpers.WallpaperHelper;
+import com.dm.wallpaper.board.items.Wallpaper;
+import com.dm.wallpaper.board.preferences.Preferences;
 
 import java.io.File;
 
-/**
- * Created by android on 2/8/2018.
+/*
+ * Wallpaper Board
+ *
+ * Copyright (c) 2017 Dani Mahardhika
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 public class WallpaperDownloader {
 
+    private final Context mContext;
+    private Wallpaper mWallpaper;
 
-    public final Context mContext;
-    public Wallpaper mWallpaper;
-
-    public WallpaperDownloader(Context context){
+    private WallpaperDownloader(Context context) {
         mContext = context;
     }
 
-    public WallpaperDownloader wallpaper(@NonNull Wallpaper wallpaper){
+    public WallpaperDownloader wallpaper(@NonNull Wallpaper wallpaper) {
         mWallpaper = wallpaper;
         return this;
     }
 
-    public void start(){
-        String fileName = mWallpaper.getName()+ "." +WallpaperHelper.getFormat(mWallpaper.getMimeType());
+    public void start() {
+        String fileName = mWallpaper.getName() +"."+ WallpaperHelper.getFormat(mWallpaper.getMimeType());
         File directory = WallpaperHelper.getDefaultWallpapersDirectory(mContext);
-        File target = new File(directory , fileName);
-        if (!directory.exists()){
-            showCafeBar(R.string.wallpaper_download_failed);
-            return;
+        File target = new File(directory, fileName);
+        if (!directory.exists()) {
+            if (!directory.mkdirs()) {
+                LogUtil.e("Unable to create directory " +directory.toString());
+                showCafeBar(R.string.wallpaper_download_failed);
+                return;
+            }
         }
-
 
         if (WallpaperHelper.isWallpaperSaved(mContext, mWallpaper)) {
             CafeBar.builder(mContext)
@@ -84,12 +96,12 @@ public class WallpaperDownloader {
             return;
         }
 
-
-        if (!URLUtil.isValidUrl(mWallpaper.getURL())){
+        if (!URLUtil.isValidUrl(mWallpaper.getUrl())) {
+            LogUtil.e("Download: wallpaper url is not valid");
             return;
         }
 
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(mWallpaper.getURL()));
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(mWallpaper.getUrl()));
         request.setMimeType(mWallpaper.getMimeType());
         request.setTitle(fileName);
         request.setDescription(mContext.getResources().getString(R.string.wallpaper_downloading));
@@ -97,21 +109,23 @@ public class WallpaperDownloader {
         request.setVisibleInDownloadsUi(false);
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         request.setDestinationUri(Uri.fromFile(target));
-        @SuppressLint("ServiceCast") DownloadManager downloadManager = (DownloadManager) mContext.getSystemService(Context.DISPLAY_SERVICE);
 
-        try{
-            if (downloadManager!=null){
+        DownloadManager downloadManager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
+
+        try {
+            if (downloadManager != null) {
                 downloadManager.enqueue(request);
                 return;
             }
-        }catch (IllegalArgumentException e){
-            e.printStackTrace();
+
+            LogUtil.e("Download: download manager is null");
+        } catch (IllegalArgumentException e) {
+            LogUtil.e(Log.getStackTraceString(e));
             return;
         }
 
         showCafeBar(R.string.wallpaper_downloading);
     }
-
 
     private void showCafeBar(int res) {
         CafeBar.builder(mContext)
@@ -123,8 +137,7 @@ public class WallpaperDownloader {
                 .show();
     }
 
-
-    public static WallpaperDownloader prepare (@NonNull Context context){
+    public static WallpaperDownloader prepare(@NonNull Context context) {
         return new WallpaperDownloader(context);
     }
 }

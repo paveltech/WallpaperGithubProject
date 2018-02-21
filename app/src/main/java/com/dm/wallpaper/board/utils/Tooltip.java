@@ -1,6 +1,5 @@
 package com.dm.wallpaper.board.utils;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -24,9 +23,9 @@ import android.widget.TextView;
 
 import com.danimahardhika.android.helpers.core.ColorHelper;
 import com.danimahardhika.android.helpers.core.DrawableHelper;
-import com.dm.material.dashboard.candybar.helpers.TypefaceHelper;
-import com.dm.material.dashboard.candybar.utils.LogUtil;
-import com.playoffstudio.wallpapergithubproject.R;
+import com.danimahardhika.android.helpers.core.utils.LogUtil;
+import com.dm.wallpaper.board.R;
+import com.dm.wallpaper.board.helpers.TypefaceHelper;
 
 /*
  * Wallpaper Board
@@ -52,7 +51,6 @@ public class Tooltip {
     private final Builder mBuilder;
     private boolean mCheckboxState = false;
 
-    @SuppressLint("RestrictedApi")
     private Tooltip(Builder builder) {
         mBuilder = builder;
 

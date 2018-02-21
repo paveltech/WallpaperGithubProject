@@ -8,10 +8,9 @@ import android.util.Log;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.Constants;
 import com.anjlab.android.iab.v3.TransactionDetails;
-
-import com.dm.material.dashboard.candybar.utils.LogUtil;
+import com.danimahardhika.android.helpers.core.utils.LogUtil;
+import com.dm.wallpaper.board.R;
 import com.dm.wallpaper.board.utils.listeners.InAppBillingListener;
-import com.playoffstudio.wallpapergithubproject.R;
 
 import java.lang.ref.WeakReference;
 

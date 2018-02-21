@@ -9,22 +9,21 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.ListPopupWindow;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewOutlineProvider;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ListPopupWindow;
 import android.widget.TextView;
 
 import com.danimahardhika.android.helpers.core.ColorHelper;
 import com.danimahardhika.android.helpers.core.DrawableHelper;
-import com.dm.material.dashboard.candybar.helpers.TypefaceHelper;
-import com.dm.material.dashboard.candybar.items.PopupItem;
-import com.dm.material.dashboard.candybar.utils.LogUtil;
-import com.playoffstudio.wallpapergithubproject.R;
+import com.danimahardhika.android.helpers.core.utils.LogUtil;
+import com.dm.wallpaper.board.R;
+import com.dm.wallpaper.board.R2;
+import com.dm.wallpaper.board.helpers.TypefaceHelper;
+import com.dm.wallpaper.board.items.PopupItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +31,22 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by android on 2/7/2018.
+/*
+ * Wallpaper Board
+ *
+ * Copyright (c) 2017 Dani Mahardhika
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 public class Popup {
@@ -61,7 +74,7 @@ public class Popup {
 
         mPopupWindow.setAnchorView(builder.mTo);
         mPopupWindow.setAdapter(mAdapter);
-        mPopupWindow.setOnItemClickListener((AdapterView<?> adapterView, View view, int i, long l) -> {
+        mPopupWindow.setOnItemClickListener((adapterView, view, i, l) -> {
             if (builder.mCallback != null) {
                 builder.mCallback.onClick(this, i);
                 return;
@@ -106,8 +119,6 @@ public class Popup {
 
         int maxWidth = context.getResources().getDimensionPixelSize(R.dimen.popup_max_width);
         int minWidth = context.getResources().getDimensionPixelSize(R.dimen.popup_min_width);
-
-
         String longestText = "";
         for (PopupItem item : mAdapter.getItems()) {
             if (item.getTitle().length() > longestText.length())
@@ -119,14 +130,10 @@ public class Popup {
         TextView textView = new TextView(context);
         textView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
         textView.setTypeface(TypefaceHelper.getRegular(context));
-
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources()
                 .getDimension(R.dimen.text_content_subtitle));
-
         textView.setPadding(padding + iconSize + padding, 0, padding, 0);
-
         textView.setText(longestText);
 
         int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(metrics.widthPixels, View.MeasureSpec.AT_MOST);
@@ -240,9 +247,9 @@ public class Popup {
 
         class ViewHolder {
 
-            @BindView(R.id.checkbox)
+            @BindView(R2.id.checkbox)
             AppCompatCheckBox checkBox;
-            @BindView(R.id.title)
+            @BindView(R2.id.title)
             TextView title;
 
             ViewHolder(@NonNull View view) {
