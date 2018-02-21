@@ -5,7 +5,6 @@ import android.support.annotation.IntDef;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
-import com.dm.material.dashboard.candybar.applications.CandyBarApplication;
 import com.dm.wallpaper.board.utils.JsonStructure;
 
 import java.lang.annotation.Retention;
@@ -19,24 +18,22 @@ import java.lang.annotation.RetentionPolicy;
 
 public class WallpaperBoardConfiguration {
 
-    public @NavigationIcon int mNavigationIcon = NavigationIcon.DEFAULT;
-    public @NavigationViewHeader int mNavigationViewHeader = NavigationViewHeader.NORMAL;
-    public @GridStyle int mWallpapersGrid = GridStyle.CARD;
+    private @NavigationIcon int mNavigationIcon = NavigationIcon.DEFAULT;
+    private @NavigationViewHeader int mNavigationViewHeader = NavigationViewHeader.NORMAL;
+    private @GridStyle int mWallpapersGrid = GridStyle.CARD;
 
-    public boolean mIsHighQualityPreviewEnabled = false;
-    public boolean mIsCropWallpaperEnabledByDefault = false;
-    public boolean mIsDashboardThemingEnabled = true;
-    public boolean mIsShadowEnabled = true;
-    public int mLatestWallpapersDisplayMax = 15;
-    @ColorInt
-    public int mAppLogoColor = -1;
+    private boolean mIsHighQualityPreviewEnabled = false;
+    private boolean mIsCropWallpaperEnabledByDefault = false;
+    private boolean mIsDashboardThemingEnabled = true;
+    private boolean mIsShadowEnabled = true;
+    private int mLatestWallpapersDisplayMax = 15;
 
-    public boolean mIsCrashReportEnabled = true;
-    public String mCrashReportEmail = null;
+    @ColorInt private int mAppLogoColor = -1;
 
-    public JsonStructure mJsonStructure = new JsonStructure.Builder().build();
+    private boolean mIsCrashReportEnabled = true;
+    private String mCrashReportEmail = null;
 
-
+    private JsonStructure mJsonStructure = new JsonStructure.Builder().build();
 
     public WallpaperBoardConfiguration setNavigationIcon(@NavigationIcon int navigationIcon) {
         mNavigationIcon = navigationIcon;
@@ -68,20 +65,16 @@ public class WallpaperBoardConfiguration {
         return this;
     }
 
-
-
-    public WallpaperBoardConfiguration setLatestWallpapersDisplayMax(@IntRange (from =5 , to =15) int count){
+    public WallpaperBoardConfiguration setLatestWallpapersDisplayMax(@IntRange(from = 5, to = 15) int count) {
         int finalCount = count;
-        if (finalCount < 5){
+        if (finalCount < 5) {
             finalCount = 5;
-        }else if (finalCount > 15){
+        } else if (finalCount > 15) {
             finalCount = 15;
         }
-
         mLatestWallpapersDisplayMax = finalCount;
         return this;
     }
-
 
     public WallpaperBoardConfiguration setHighQualityPreviewEnabled(boolean highQualityPreviewEnabled) {
         mIsHighQualityPreviewEnabled = highQualityPreviewEnabled;
@@ -170,20 +163,18 @@ public class WallpaperBoardConfiguration {
         int STYLE_4 = 4;
     }
 
-
-    @IntDef({NavigationViewHeader.MINI , NavigationViewHeader.NONE , NavigationViewHeader.NORMAL})
+    @IntDef({NavigationViewHeader.NORMAL, NavigationViewHeader.MINI, NavigationViewHeader.NONE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NavigationViewHeader{
+    public @interface NavigationViewHeader {
         int NORMAL = 0;
         int MINI = 1;
-        int NONE =2;
+        int NONE = 2;
     }
 
-
-    @IntDef({GridStyle.CARD , GridStyle.FLAT})
+    @IntDef({GridStyle.CARD, GridStyle.FLAT})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GridStyle{
+    public @interface GridStyle {
         int CARD = 0;
-        int FLAT =1;
+        int FLAT = 1;
     }
 }
