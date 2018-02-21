@@ -4,15 +4,16 @@ import android.app.Application;
 import android.content.Intent;
 
 import com.danimahardhika.android.helpers.core.TimeHelper;
-import com.dm.wallpaper.board.R;
-import com.dm.wallpaper.board.activities.WallpaperBoardCrashReport;
+import com.dm.material.dashboard.candybar.utils.LogUtil;
+
 import com.dm.wallpaper.board.databases.Database;
 import com.dm.wallpaper.board.helpers.LocaleHelper;
 import com.dm.wallpaper.board.helpers.UrlHelper;
 import com.dm.wallpaper.board.preferences.Preferences;
 import com.dm.wallpaper.board.utils.ImageConfig;
-import com.danimahardhika.android.helpers.core.utils.LogUtil;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.playoffstudio.wallpapergithubproject.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
