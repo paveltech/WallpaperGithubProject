@@ -10,10 +10,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.danimahardhika.android.helpers.core.FileHelper;
 import com.danimahardhika.android.helpers.core.WindowHelper;
-import com.dm.wallpaper.board.R;
+
 import com.dm.wallpaper.board.items.Wallpaper;
 import com.dm.wallpaper.board.preferences.Preferences;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
+import com.playoffstudio.wallpapergithubproject.R;
 
 import java.io.File;
 import java.text.DecimalFormat;

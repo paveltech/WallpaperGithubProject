@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 
 import com.dm.material.dashboard.candybar.helpers.LocaleHelper;
 import com.dm.material.dashboard.candybar.items.Language;
+import com.dm.wallpaper.board.applications.WallpaperBoardApplication;
 import com.dm.wallpaper.board.items.PopupItem;
 import com.playoffstudio.wallpapergithubproject.R;
 

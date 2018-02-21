@@ -10,14 +10,16 @@ import android.util.Log;
 import android.webkit.URLUtil;
 
 import com.danimahardhika.android.helpers.core.FileHelper;
-import com.danimahardhika.android.helpers.core.utils.LogUtil;
+
 import com.danimahardhika.cafebar.CafeBar;
 import com.danimahardhika.cafebar.CafeBarTheme;
-import com.dm.wallpaper.board.R;
+import com.dm.material.dashboard.candybar.utils.LogUtil;
+
 import com.dm.wallpaper.board.helpers.TypefaceHelper;
 import com.dm.wallpaper.board.helpers.WallpaperHelper;
 import com.dm.wallpaper.board.items.Wallpaper;
 import com.dm.wallpaper.board.preferences.Preferences;
+import com.playoffstudio.wallpapergithubproject.R;
 
 import java.io.File;
 

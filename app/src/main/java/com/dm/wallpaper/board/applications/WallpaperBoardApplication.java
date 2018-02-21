@@ -61,7 +61,7 @@ public abstract class WallpaperBoardApplication extends Application implements A
                 .build());
 
         //Enable logging
-        LogUtil.setLoggingTag(getString(R.string.app_name));
+
         LogUtil.setLoggingEnabled(true);
 
         mConfiguration = onInit();
